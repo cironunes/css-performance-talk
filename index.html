@@ -79,12 +79,6 @@
         <section>
           <section>
             <div data-markdown>
-              ## Performance == UX
-            </div>
-          </section>
-
-          <section>
-            <div data-markdown>
               > a 1-second page slowdown could cost Amazon $1.6 billion in sales each year.
             </div>
           </section>
@@ -94,7 +88,13 @@
               ![Performance == UX](http://3vavpsbeqbk19ao0rfgkqm17sj.wpengine.netdna-cdn.com/wp-content/uploads/2012/03/Jakob-Nielsen-response-time-infographic.jpg)
             </div>
           </section>
-        </section>
+
+           <section>
+            <div data-markdown>
+              ## Performance == UX
+            </div>
+          </section>
+       </section>
 
         <section>
           <div data-markdown>
@@ -202,6 +202,13 @@
           <section>
             #8 Consider using inline styles
           </section>
+
+          <section>
+            <div data-markdown>
+              ![Google stylesheets](http://www.phpied.com/wp-content/uploads/2012/06/g.jpg)
+            </div>
+            <small>Image from <a href="http://www.phpied.com/css-and-the-critical-path/">phpied.com/css-and-the-critical-path/</a></small>
+          </section>
         </section>
 
         <section>
@@ -224,9 +231,15 @@
 
           <section>
             <div data-markdown>
-              ![Animations](http://www.html5rocks.com/en/tutorials/speed/high-performance-animations/devtools-waterfall.jpg)
-              [html5rocks.com/en/tutorials/speed/high-performance-animations/](http://www.html5rocks.com/en/tutorials/speed/high-performance-animations/)
+              Paint & Layout
             </div>
+          </section>
+
+          <section>
+            <div data-markdown>
+              ![Animations](http://www.html5rocks.com/en/tutorials/speed/high-performance-animations/devtools-waterfall.jpg)
+            </div>
+            <small>Image from <a href="http://www.html5rocks.com/en/tutorials/speed/high-performance-animations/">html5rocks.com/en/tutorials/speed/high-performance-animations/</a></small>
           </section>
 
           <section>
@@ -237,10 +250,23 @@
 
           <section>
             <div>
-              #10 Animate using <strong>transform</strong>
+              #10 Animate using <strong>transform</strong> (it may require translateZ or translate3d)
             </div>
           </section>
 
+          <section>
+            <div data-markdown>
+              ![Animate.css](img/animate.png)
+              [daneden.github.io/animate.css/](http://daneden.github.io/animate.css/)
+            </div>
+          </section>
+
+          <section>
+            <div data-markdown>
+              ![Effeckt.css](img/effeckt.png)
+              [h5bp.github.io/Effeckt.css/](http://h5bp.github.io/Effeckt.css/)
+            </div>
+          </section>
         </section>
 
         <section>
@@ -249,8 +275,8 @@
           </section>
 
           <section>
-            <div data-markdown>
-              Key selector
+            Key selector
+            <div class="fragment" data-markdown>
               ```css
                 ul > li > * {
                   ...
@@ -270,6 +296,12 @@
               [TLDR;](http://csswizardry.com/2011/09/writing-efficient-css-selectors/) NO!
             </div>
           </section>
+
+          <section>
+            <div>
+              #11 Before worrying about CSS Selectors performance (micro improvements) do the basics
+            </div>
+          </section>
         </section>
 
         <section>
@@ -279,6 +311,7 @@
             - [Browser Diet](http://browserdiet.com/en/)
             - [CSS the critical path](http://www.phpied.com/css-and-the-critical-path/)
             - [High Performance Animations](http://www.html5rocks.com/en/tutorials/speed/high-performance-animations/)
+            - [Writting Efficient CSS Selectors](http://csswizardry.com/2011/09/writing-efficient-css-selectors/)
           </div>
         </section>
 
