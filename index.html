@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>CSS Performance</title>
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="css/reveal.min.css">
+  <link rel="stylesheet" href="css/theme/default.css" id="theme">
+  <style>
+    .logo {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .reveal section img {
+      background-color: #fff;
+      border-color: #f3f3f3;
+      padding: 5px;
+    }
+    .reveal section .logo-wrapper img {
+      background-color: transparent;
+      padding: 0;
+      margin: 10px;
+    }
+    .logo-wrapper {
+      position: relative;
+      display: inline;
+    }
+    .logo-info {
+      position: absolute;
+      bottom: 20px;
+      left: 15px;
+    }
+  </style>
+
+  <!-- For syntax highlighting -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+
+  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+  <script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = 'css/print/pdf.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+  </script>
+
+  <!--[if lt IE 9]>
+  <script src="lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+  <div class="reveal">
+    <img class="logo" src="img/ac-logo.png" alt="Avenue Code logo" />
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+          <h1>CSS Performance</h1>
+          <p>
+            <small>by <strong>Ciro Nunes</strong> <a href="http://avenuecode.com/">@AvenueCode</a></small>
+          </p>
+          <p>
+            <small><a href="http://cironunes.com/css-performance-talk">cironunes.com/css-performance-talk</a></small>
+          </p>
+        </section>
+
+        <section>
+          <section>
+            <div data-markdown>
+              ## Performance == UX
+            </div>
+          </section>
+
+          <section>
+            <div data-markdown>
+              > a 1-second page slowdown could cost Amazon $1.6 billion in sales each year.
+            </div>
+          </section>
+
+          <section>
+            <div data-markdown>
+              ![Performance == UX](http://3vavpsbeqbk19ao0rfgkqm17sj.wpengine.netdna-cdn.com/wp-content/uploads/2012/03/Jakob-Nielsen-response-time-infographic.jpg)
+            </div>
+          </section>
+        </section>
+
+        <section>
+          <div data-markdown>
+            ## Agenda
+          </div>
+          <ul>
+            <li class="fragment">Front-end Performance 101</li>
+            <li class="fragment">Optimizing the critical path</li>
+            <li class="fragment">Animations</li>
+            <li class="fragment">Selectors</li>
+          </ul>
+        </section>
+
+        <section>
+          <section>
+            <div>
+              <p>#1 Put <strong>styles</strong> at the top and <strong>scripts</strong> at the bottom</p>
+            </div>
+          </section>
+
+          <section>
+            <div>
+              <p>#2 Make fewer HTTP requests</p>
+            </div>
+          </section>
+
+          <section>
+            <div>
+              <p>#3 Maximise the parallelisation</p>
+            </div>
+          </section>
+
+          <section>
+            <div>
+              <p>#4 Use DNS prefetching</p>
+              <div data-markdown>
+                ```html
+                &lt;link rel="dns-prefetch" href="http://avenuecode.com/"&gt;
+                ```
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div>
+              <p>#5 Gzip and minify the resources</p>
+            </div>
+          </section>
+
+          <section>
+            <div>
+              <p>#6 Remove the ability of the user to zoom (mobile)</p>
+              <pre><code>
+                <meta name="viewport" content="user-scalable=no">
+              </code></pre>
+              <a href="http://timkadlec.com/2013/11/Avoiding-the-300ms-click-delay-accessibly/">Avoiding the 300ms click delay</a>
+            </div>
+          </section>
+
+          <section>
+            <div data-markdown>
+              ![Yslow](img/yslow.png)
+              [developer.yahoo.com/yslow](http://developer.yahoo.com/yslow)
+            </div>
+          </section>
+
+          <section>
+            <div data-markdown>
+              ![Page Speed](img/page-speed.png)
+              [developers.google.com/speed/pagespeed](http://developers.google.com/speed/pagespeed)
+            </div>
+          </section>
+
+          <section>
+            <div data-markdown>
+              ![Browser Diet](img/browser-diet.png)
+              [browserdiet.com](http://browserdiet.com)
+            </div>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <div>
+              <h2>The critical path</h2>
+            </div>
+          </section>
+
+          <section>
+            <div data-markdown>
+              > “Critical path is the necessary journey between a user requesting your page and then actually seeing something” - [CSS Wizardry](http://www.csswizardry.com/)
+            </div>
+          </section>
+
+          <section>
+            <div data-markdown>
+              CSS blocks the page rendering, so...
+            </div>
+          </section>
+
+          <section>
+            #7 Serve CSS files from the same host (No DNS lookups).
+          </section>
+
+          <section>
+            #8 Consider using inline styles
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <div data-markdown>
+              ## Animations
+            </div>
+          </section>
+
+          <section>
+            <div data-markdown>
+              4 things a browser can animate cheaply
+
+              - Position (transform: translate)
+              - Scale (transform: scale)
+              - Rotation (transform: rotate)
+              - Opacity
+            </div>
+          </section>
+
+          <section>
+            <div data-markdown>
+              ![Animations](http://www.html5rocks.com/en/tutorials/speed/high-performance-animations/devtools-waterfall.jpg)
+              [html5rocks.com/en/tutorials/speed/high-performance-animations/](http://www.html5rocks.com/en/tutorials/speed/high-performance-animations/)
+            </div>
+          </section>
+
+          <section>
+            <div>
+              #9 Avoid layout
+            </div>
+          </section>
+
+          <section>
+            <div>
+              #10 Animate using <strong>transform</strong>
+            </div>
+          </section>
+
+        </section>
+
+        <section>
+          <section data-markdown>
+            ## Selectors
+          </section>
+
+          <section>
+            <div data-markdown>
+              Key selector
+              ```css
+                ul > li > * {
+                  ...
+                }
+              ```
+            </div>
+          </section>
+
+          <section>
+            <div data-markdown>
+              Should we really care?
+            </div>
+          </section>
+
+          <section>
+            <div data-markdown>
+              [TLDR;](http://csswizardry.com/2011/09/writing-efficient-css-selectors/) NO!
+            </div>
+          </section>
+        </section>
+
+        <section>
+          <div data-markdown>
+            ## Learn more
+            - [Front-end Performance Guide - CSS Wizardry](http://csswizardry.com/2013/01/front-end-performance-for-web-designers-and-front-end-developers/)
+            - [Browser Diet](http://browserdiet.com/en/)
+            - [CSS the critical path](http://www.phpied.com/css-and-the-critical-path/)
+            - [High Performance Animations](http://www.html5rocks.com/en/tutorials/speed/high-performance-animations/)
+          </div>
+        </section>
+
+        <section>
+          <section>
+            <h1>THE END</h1>
+            <h3>by Ciro Nunes <a href="http://avenuecode.com/">@Avenue Code</a></h3>
+            <p>
+              <small><a href="http://cironunes.com/css-performance-talk">cironunes.com/css-performance-talk</a></small>
+            </p>
+          </section>
+
+          <section>
+            <div data-markdown>
+              <script type="text/template">
+                ## Challenge
+                - Implement the presented tips in your Quiz app <!-- .element: class="fragment" -->
+                - Implement a Grunt/Gulp task to use inline styles <!-- .element: class="fragment" -->
+                - Use the DevTools (or similar) to benchmark the changes and put a screenshot in your README<!-- .element: class="fragment" -->
+              </script>
+            </div>
+          </section>
+        </section>
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+
+    <script>
+
+        // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
